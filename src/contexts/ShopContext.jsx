@@ -137,7 +137,8 @@ export const ShopContextProvider = (props) => {
         removeFromCart,
         updateCartItemCount,
         deleteFromCart,
-        wishlistItem
+        wishlistItem,
+        getNewData,
     }
 
     return (

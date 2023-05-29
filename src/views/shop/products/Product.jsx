@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { TrucateText } from '../../../components/TrucateText'
 import { ShopContext } from '../../../contexts/ShopContext' 
+import { useStateContext } from '../../../contexts/ContextProvider'
 
 export default function Product({ data, maxLength }) {
     const { addToCart, wishlistedItem, wishlistItem } = useContext(ShopContext)
+    const { token } = useStateContext()
 
     const isWishlisted = (productId) => {
         const item = wishlistedItem.find((item) => item.product_id === productId);
@@ -18,14 +20,14 @@ export default function Product({ data, maxLength }) {
                 <div className="product-item bg-light mb-4">
                     <div className="product-img position-relative overflow-hidden">
                         <img className="img-fluid w-100" src={product.image} alt="" />
-                            <div className="product-action">
+                           {token && ( <div className="product-action">
                                 <Link className={'btn btn-outline-dark btn-square'} onClick={() => addToCart(product.id, product.price)}>
                                     <i className="fas fa-shopping-cart" />
                                 </Link>
                                 <Link className="btn btn-outline-dark btn-square" onClick={() => wishlistItem(product.id)} style={{ color: isWishlisted(product.id) ? 'red' : '' }}>  
                                     <i className="fas fa-heart" />
                                 </Link>
-                            </div>
+                            </div>)}
                     </div>
                     <div className="text-center py-4">
                         <Link 

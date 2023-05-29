@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export const Topbar = ({ token, user, logout }) => {
-
  
   return (
     <div className='container-fluid'>
@@ -18,7 +17,7 @@ export const Topbar = ({ token, user, logout }) => {
             <div className="col-lg-6 text-center text-lg-right">
                 <div className="d-inline-flex align-items-center">
                     <div className="btn-group">
-                        <button className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">{ user ? user?.name : 'Account'}</button>
+                        <button className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">{ token ? user?.name : 'Account'}</button>
                         <div className="dropdown-menu dropdown-menu-right">
                             {token ? (<Link href="#" className="dropdown-item" onClick={logout}>Logout</Link>) :
                             (

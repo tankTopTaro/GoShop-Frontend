@@ -11,7 +11,8 @@ export default function GuestLayout() {
 
     if (token) {
         return <Navigate to='/' />
-    }
+    } 
+
     return (
         <div id="guestLayout" className="animated fadeInDown">
             <Topbar />

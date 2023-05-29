@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CustomLink from './CustomLink'
 import { ShopContext } from '../contexts/ShopContext'
+import { useStateContext } from '../contexts/ContextProvider'
 
 export const Navbar = () => {
   const { totalItems, wishlistCount, wishlistedItem } = useContext(ShopContext)
+  const { token } = useStateContext()
 
-  console.log(wishlistCount)
   return (
     <>
       <div className="container-fluid bg-dark mb-30">
@@ -76,11 +77,11 @@ export const Navbar = () => {
                 <div className="navbar-nav mr-auto py-0">
                   <CustomLink to='/'>Home</CustomLink>
                   <CustomLink to='/shop'>Shop</CustomLink>
-                  <CustomLink to='/cart'>Shopping Cart</CustomLink>
-                  <CustomLink to="/wishlist">My Wishlist</CustomLink>
+                  {token && <CustomLink to='/cart'>Shopping Cart</CustomLink>}
+                  {token && <CustomLink to="/wishlist">My Wishlist</CustomLink>}
                   <CustomLink to="/contact">Contact</CustomLink>
                 </div>
-                <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                {token && (<div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                     <i className="fas fa-heart text-primary mx-1" />
                     <span
                       className="badge text-secondary border border-secondary rounded-circle"
@@ -93,7 +94,7 @@ export const Navbar = () => {
                       style={{ paddingBottom: 2 }}>
                         { totalItems > 0 ? totalItems : 0 } 
                     </span>
-                </div>
+                </div>)}
               </div>
             </nav>
           </div>

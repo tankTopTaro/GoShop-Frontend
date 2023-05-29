@@ -3,11 +3,19 @@ import { BsCartPlusFill, BsCartDashFill } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import FetchProductDetail from '../../../data/FetchProductDetail'
 import { ShopContext } from '../../../contexts/ShopContext'
+import { useStateContext } from "../../../contexts/ContextProvider"
 
 const ProductDetail = () => {
     const productId = useParams()
+
+    const { token } = useStateContext()
     const { product, loading, error } = FetchProductDetail(productId.pid)
-    const { cartItems, addToCart, removeFromCart, updateCartItemCount } = useContext(ShopContext)
+    const { cartItem, addToCart, removeFromCart, updateCartItemCount } = useContext(ShopContext)
+
+    const cartItemExists = cartItem.find(item => item.product_id === product.id)
+    const inputValue = cartItemExists ? cartItemExists.quantity : 0
+
+    console.log(inputValue)
 
     { loading && <div>Loading...</div> }
     { error && <div>Error: {error}</div> }
@@ -34,19 +42,19 @@ const ProductDetail = () => {
                         <h3 className="font-weight-semi-bold mb-4">$ {product.price}</h3>
                         <p className="mb-4">{product.description}</p>
                         <div className="d-flex align-items-center mb-4 pt-2">
-                            <div className="input-group quantity mr-3" style={{width: '130px'}}>
+                            {token && (<div className="input-group quantity mr-3" style={{width: '130px'}}>
                                 <div className="input-group-btn">
                                     <button className="btn btn-primary btn-minus" onClick={() => removeFromCart(product.id)}>
                                         <BsCartDashFill />
                                     </button>
                                 </div>
-                                    <input type="number" className="form-control bg-secondary border-0 text-center h-auto" value={cartItems[product.id]} onChange={(e) => updateCartItemCount(Number(e.target.value), product.id)}/>
+                                    <input type="number" className="form-control bg-secondary border-0 text-center h-auto" value={inputValue} onChange={(e) => updateCartItemCount(Number(e.target.value), product.id)}/>
                                 <div className="input-group-btn">
-                                    <button className="btn btn-primary btn-plus" onClick={() => addToCart(product.id)}>
+                                    <button className="btn btn-primary btn-plus" onClick={() => addToCart(product.id, product.price)}>
                                         <BsCartPlusFill />
                                     </button>
                                 </div>
-                            </div>
+                            </div>)}
                         </div>
                         {/* ---------- Social Media Buttons ---------- */}
                         <div className="d-flex pt-2">

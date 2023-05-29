@@ -1,9 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../../contexts/ShopContext";
 import CartItem from "./cart/CartItem";
+import { useStateContext } from "../../contexts/ContextProvider";
+import { Navigate } from "react-router-dom";
 
 export default function Cart() {
     const { cart, cartItem, totalPrice } = useContext(ShopContext)
+    const { token } = useStateContext()
+
+    if (!token) {
+        return <Navigate to='/login' />
+    }
 
     const totalAmount = cartItem.map(item => item.normalPrice * item.quantity).reduce((total, price) => total + price, 0)
 

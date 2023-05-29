@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { Link } from 'react-router-dom'
 import { useStateContext } from "../../contexts/ContextProvider"
 import axiosClient from "../../api/axios-client"
+import { ShopContext } from "../../contexts/ShopContext"
 
 export default function Login() {
     const emailRef = useRef()
@@ -10,6 +11,7 @@ export default function Login() {
     const [errors, setErrors] = useState(null)
 
     const {setUser, setToken, setUserId} = useStateContext()
+    const { getNewData } = useContext(ShopContext)
 
     const submit = (e) => {
         e.preventDefault()
@@ -26,6 +28,7 @@ export default function Login() {
                 setUser(data.user)
                 setToken(data.token)
                 setUserId(data.user.id)
+                getNewData()
             })
             .catch(err => {
                 const response = err.response

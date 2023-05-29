@@ -1,9 +1,16 @@
 import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { ShopContext } from "../../contexts/ShopContext";
 import WishlistItem from "./cart/WishlistItem";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 export default function Wishlist() {
     const { wishlistedItem, wishlistItems, cartItem } = useContext(ShopContext)
+    const { token } = useStateContext()
+
+    if (!token) {
+        return <Navigate to='/login' />
+    }
 
     console.log(cartItem)
 

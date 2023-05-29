@@ -51,6 +51,14 @@ const router = createBrowserRouter([
         element: <GuestLayout />,
         children: [
             {
+                path: '/',
+                element: <Navigate to='/home' />
+            },
+            {
+                path: '/home',
+                element: <Home />
+            },
+            {
                 path: '/login',
                 element: <Login />
             },
