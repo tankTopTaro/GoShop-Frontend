@@ -15,8 +15,6 @@ const ProductDetail = () => {
     const cartItemExists = cartItem.find(item => item.product_id === product.id)
     const inputValue = cartItemExists ? cartItemExists.quantity : 0
 
-    console.log(inputValue)
-
     { loading && <div>Loading...</div> }
     { error && <div>Error: {error}</div> }
 

@@ -170,7 +170,7 @@ export const Footer = () => {
                     <div className="col-md-6 px-xl-0 text-center text-md-right">
                         <img
                             className="img-fluid"
-                            src="./src/assets/img/payments.png"
+                            src="../../src/assets/img/payments.png"
                             alt=""
                         />
                     </div>

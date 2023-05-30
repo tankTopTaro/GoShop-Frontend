@@ -1,23 +1,24 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import CustomLink from './CustomLink'
-import { ShopContext } from '../contexts/ShopContext'
-import { useStateContext } from '../contexts/ContextProvider'
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import CustomLink from "./CustomLink";
+import { ShopContext } from "../contexts/ShopContext";
+import { useStateContext } from "../contexts/ContextProvider";
 
 export const Navbar = () => {
-  const { totalItems, wishlistCount, wishlistedItem } = useContext(ShopContext)
   const { token } = useStateContext()
+  const { totalItems, wishlistCount } = useContext(ShopContext)
 
   return (
     <>
       <div className="container-fluid bg-dark mb-30">
         <div className="row px-xl-5">
           <div className="col-lg-3 d-none d-lg-block">
-            <a 
+            <a
               className="btn d-flex align-items-center justify-content-between bg-primary w-100"
               data-toggle="collapse"
               href="#navbar-vertical"
-              style={{ height: 65, padding: "0 30px" }}>
+              style={{ height: 65, padding: "0 30px" }}
+            >
               <h6 className="text-dark m-0">
                 <i className="fa fa-bars mr-2" />
                 Categories
@@ -27,36 +28,54 @@ export const Navbar = () => {
             <nav
               className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
               id="navbar-vertical"
-              style={{ width: "calc(100% - 30px)", zIndex: 999 }}>
+              style={{ width: "calc(100% - 30px)", zIndex: 999 }}
+            >
               <div className="navbar-nav w-100">
                 <div className="nav-item dropdown dropright">
                   <a
                     href="#"
                     className="nav-link dropdown-toggle"
-                    data-toggle="dropdown">
-                    Clothing <i className="fa fa-angle-right float-right mt-1" />
+                    data-toggle="dropdown"
+                  >
+                    Clothing{" "}
+                    <i className="fa fa-angle-right float-right mt-1" />
                   </a>
                   <div className="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                    <option value="men's clothing"  className="dropdown-item" /* onClick={categoryHandler} */>
+                    <Link
+                      to={`/products/category/men's%20clothing`}
+                      className="dropdown-item"
+                    >
                       Men's Clothing
-                    </option>
-                    <option value="women's clothing" className="dropdown-item" /* onClick={categoryHandler} */>
+                    </Link>
+                    <Link
+                      to={`/products/category/women's%20clothing`}
+                      className="dropdown-item"
+                    >
                       Women's Clothing
-                    </option>
+                    </Link>
                   </div>
                 </div>
-                <option value='jewelery' className="nav-item nav-link" /* onClick={categoryHandler} */>
+                <Link
+                  to={`/products/category/jewelery`}
+                  className="nav-item nav-link"
+                >
                   Jewelery
-                </option>
-                <option value='electronics' className="nav-item nav-link" /* onClick={categoryHandler} */>
+                </Link>
+                <Link
+                  to={`/products/category/electronics`}
+                  className="nav-item nav-link"
+                >
                   Electronics
-                </option>
+                </Link>
               </div>
             </nav>
           </div>
           <div className="col-lg-9">
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-              <Link to='/' className="text-decoration-none d-block d-lg-none">
+              <Link
+                to="/"
+                className="text-decoration-none d-block d-lg-none"
+              >
                 <span className="h1 text-uppercase text-dark bg-light px-2">
                   Go
                 </span>
@@ -68,38 +87,56 @@ export const Navbar = () => {
                 type="button"
                 className="navbar-toggler"
                 data-toggle="collapse"
-                data-target="#navbarCollapse">
+                data-target="#navbarCollapse"
+              >
                 <span className="navbar-toggler-icon" />
               </button>
               <div
                 className="collapse navbar-collapse justify-content-between"
-                id="navbarCollapse">
+                id="navbarCollapse"
+              >
                 <div className="navbar-nav mr-auto py-0">
-                  <CustomLink to='/'>Home</CustomLink>
-                  <CustomLink to='/shop'>Shop</CustomLink>
-                  {token && <CustomLink to='/cart'>Shopping Cart</CustomLink>}
-                  {token && <CustomLink to="/wishlist">My Wishlist</CustomLink>}
-                  <CustomLink to="/contact">Contact</CustomLink>
+                  <CustomLink to="/">Home</CustomLink>
+                  <CustomLink to="/shop">Shop</CustomLink>
+                  {token && (
+                    <CustomLink to="/cart">
+                      Shopping Cart
+                    </CustomLink>
+                  )}
+                  {token && (
+                    <CustomLink to="/wishlist">
+                      My Wishlist
+                    </CustomLink>
+                  )}
+                  <CustomLink to="/contact">
+                    Contact
+                  </CustomLink>
                 </div>
-                {token && (<div className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                {token && (
+                  <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                     <i className="fas fa-heart text-primary mx-1" />
                     <span
                       className="badge text-secondary border border-secondary rounded-circle"
-                      style={{ paddingBottom: 2 }}>
-                        { wishlistCount > 0 ? wishlistCount : 0 } 
+                      style={{ paddingBottom: 2 }}
+                    >
+                      {wishlistCount > 0
+                        ? wishlistCount
+                        : 0}
                     </span>
                     <i className="fas fa-shopping-cart text-primary mx-1" />
                     <span
                       className="badge text-secondary border border-secondary rounded-circle"
-                      style={{ paddingBottom: 2 }}>
-                        { totalItems > 0 ? totalItems : 0 } 
+                      style={{ paddingBottom: 2 }}
+                    >
+                      {totalItems > 0 ? totalItems : 0}
                     </span>
-                </div>)}
+                  </div>
+                )}
               </div>
             </nav>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};

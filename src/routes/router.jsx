@@ -10,6 +10,8 @@ import Contact from "../views/shop/Contact";
 import Cart from "../views/shop/Cart";
 import Wishlist from "../views/shop/Wishlist";
 import ProductDetail from "../views/shop/products/ProductDetail";
+import SearchResult from "../views/shop/products/SearchResult";
+import CategoryResult from "../views/shop/products/CategoryResult";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
             {
                 path: '/products/:pid',
                 element: <ProductDetail />
+            },
+            {
+                path: '/products/search/:query',
+                element: <SearchResult />
+            },
+            {
+                path: 'products/category/:category',
+                element: <CategoryResult />
             },
             {
                 path: '/cart',
@@ -57,6 +67,18 @@ const router = createBrowserRouter([
             {
                 path: '/home',
                 element: <Home />
+            },
+            {
+                path: '/products/:pid',
+                element: <ProductDetail />
+            },
+            {
+                path: '/products/search/:query',
+                element: <SearchResult />
+            },
+            {
+                path: '/products/category/:category',
+                element: <CategoryResult />
             },
             {
                 path: '/login',

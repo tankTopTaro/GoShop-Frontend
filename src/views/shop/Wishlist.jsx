@@ -12,8 +12,6 @@ export default function Wishlist() {
         return <Navigate to='/login' />
     }
 
-    console.log(cartItem)
-
     return (
         <div className="container-fluid">
             <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
