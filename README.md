@@ -54,7 +54,8 @@
 ## BUGS | ISSUES
 ### Please list any bugs you encountered here.
 - [x] A bug is created that prevents user from adding the same item to the wishlist if it had been removed from the wishlist
-- [ ] A bug that prevents the user from removing item from Wishlist if the same item is also added to cart.
+- [x] A bug that prevents the user from removing item from Wishlist if the same item is also added to cart.
+- [ ] The BackToTop button is missing in the deployed version of the frontend
 
 ---
 
